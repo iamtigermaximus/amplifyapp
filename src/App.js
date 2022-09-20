@@ -9,6 +9,15 @@ import {
   //  updateTodo as updateTodoMutation,
 } from './graphql/mutations'
 import { listTodos } from './graphql/queries'
+import styled from 'styled-components'
+
+const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 30px;
+  width: 400px;
+`
 
 const initialFormState = { name: '', description: '' }
 
@@ -45,19 +54,22 @@ function App({ signOut }) {
   return (
     <div className='App'>
       <h1>My Notes App</h1>
-      <input
-        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-        placeholder='Note name'
-        value={formData.name}
-      />
-      <input
-        onChange={(e) =>
-          setFormData({ ...formData, description: e.target.value })
-        }
-        placeholder='Note description'
-        value={formData.description}
-      />
-      <button onClick={createTodo}>Create Note</button>
+      <FormContainer>
+        <input
+          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          placeholder='Note name'
+          value={formData.name}
+        />
+        <input
+          onChange={(e) =>
+            setFormData({ ...formData, description: e.target.value })
+          }
+          placeholder='Note description'
+          value={formData.description}
+        />
+        <button onClick={createTodo}>Create Note</button>
+      </FormContainer>
+
       <div style={{ marginBottom: 30 }}>
         {todos.map((todo) => (
           <div key={todo.id || todo.name}>
